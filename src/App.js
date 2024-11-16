@@ -11,8 +11,8 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      <header>
         <button onClick={getNotes}>get notes</button>
         <div>
           {notes.map(({ title }, index) => (

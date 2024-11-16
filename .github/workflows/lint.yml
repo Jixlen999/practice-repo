@@ -9,4 +9,4 @@ jobs:
       - name: Install deps
         run: npm ci
       - name: Lint
-        run: npm lint
+        run: npm run lint

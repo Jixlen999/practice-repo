@@ -12,7 +12,7 @@ export const mockApiResponse = (
   method = "GET",
   statusCode = 200
 ) => {
-  return http[method.toLocaleLowerCase()](path, ({ request }) => {
+  return http[method.toLocaleLowerCase()](path, () => {
     return HttpResponse.json(jsonResponse, { status: statusCode });
   });
 };

@@ -5,9 +5,12 @@ const App = () => {
   const [notes, setNotes] = useState([]);
 
   const getNotes = async () => {
-    await axios.get("https://localhost:7103/notes").then(({ data }) => {
-      setNotes(data.notes);
-    });
+    try {
+      const response = await axios.get("https://localhost:7103/notes");
+      setNotes(response.data.notes);
+    } catch (error) {
+      console.error("Notes error:", error);
+    }
   };
 
   return (

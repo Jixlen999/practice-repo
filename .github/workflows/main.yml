@@ -14,8 +14,18 @@ jobs:
     needs: [lint]
     strategy:
       matrix:
-        version: ["16.x", "18.x"]
-    runs-on: ubuntu-latest
+        os: [macos-latest, ubuntu-latest]
+        version: [16.x, 18.x]
+        exclude:
+          - os: macos-latest
+            version: 16.x
+        include: 
+            - os: ubuntu-latest
+              version: 16.x
+              is_ubuntu_16: "true"
+    runs-on: ${{matrix.os}}
+    env: 
+      IS_UBUNTU_ON_NODE_16: ${{matrix.is_ubuntu_16}}
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
@@ -28,3 +38,5 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run tests
         run: npx playwright test
+      - name: Check if running on ubuntu + node v16
+        run: echo $IS_UBUNTU_ON_NODE_16
